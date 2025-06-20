@@ -1,16 +1,22 @@
+CC = gcc
+CFLAGS = -g
+
 src:=fresher
 out:=output
 
-all: evenbit bubbleSort fibonacci
+all: env evenbit bubbleSort fibonacci
 
-evenbit: 
-	gcc -Wall ${src}/evenbit.c -o ${out}/evenbit
+env:
+	mkdir -p ${out}
 
-bubbleSort: 
-	gcc -Wall ${src}/bubbleSort.c -o ${out}/bubbleSort
+evenbit: env
+	${CC} -Wall ${src}/evenbit.c -o ${out}/evenbit
 
-fibonacci: 
-	gcc -Wall ${src}/fibonacci.c -o ${out}/fibonacci
+bubbleSort: env
+	${CC} -Wall ${src}/bubbleSort.c -o ${out}/bubbleSort
+
+fibonacci: env
+	${CC} -Wall ${src}/fibonacci.c -o ${out}/fibonacci
 
 clean:
-	rm -rf ${out}/*
+	rm -rf ${out}
