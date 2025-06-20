@@ -1,8 +1,8 @@
-CC = gcc
-CFLAGS = -g
+CC ?= gcc
+CFLAGS ?= -g
 
-src:=fresher
-out:=output
+src = fresher
+out = output
 
 all: env evenbit bubbleSort fibonacci
 
