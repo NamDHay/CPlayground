@@ -1,6 +1,3 @@
-CC ?= gcc
-CFLAGS ?= -g
-
 src = fresher
 out = output
 
@@ -10,13 +7,13 @@ env:
 	mkdir -p ${out}
 
 evenbit: env
-	${CC} -Wall ${src}/evenbit.c -o ${out}/evenbit
+	${CC} -Wall ${src}/evenbit.c ${LDFLAGS} -o ${out}/evenbit
 
 bubbleSort: env
-	${CC} -Wall ${src}/bubbleSort.c -o ${out}/bubbleSort
+	${CC} -Wall ${src}/bubbleSort.c ${LDFLAGS} -o ${out}/bubbleSort
 
 fibonacci: env
-	${CC} -Wall ${src}/fibonacci.c -o ${out}/fibonacci
+	${CC} -Wall ${src}/fibonacci.c ${LDFLAGS} -o ${out}/fibonacci
 
 clean:
 	rm -rf ${out}
