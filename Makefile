@@ -1,30 +1,30 @@
-src = fresher
-out = output
+CC      := gcc
+SRC_DIR := fresher
+OUT_DIR := output
+
+SRCS := $(wildcard $(SRC_DIR)/*.c)
+BINS := $(patsubst $(SRC_DIR)/%.c, $(OUT_DIR)/%, $(SRCS))
 
 .PHONY: all
-all: evenbit bubbleSort fibonacci
+all: $(BINS)
 
-.PHONY += env
-env:
-	mkdir -p ${out}
+$(OUT_DIR):
+	mkdir -p $@
 
-.PHONY += evenbit
-evenbit: env
-	${CC} -Wall ${src}/evenbit.c ${LDFLAGS} -o ${out}/evenbit
+$(OUT_DIR)/%: $(SRC_DIR)/%.c | $(OUT_DIR)
+	$(CC) -Wall $< -o $@
 
-.PHONY += bubbleSort
-bubbleSort: env
-	${CC} -Wall ${src}/bubbleSort.c ${LDFLAGS} -o ${out}/bubbleSort
-
-.PHONY += fibonacci
-fibonacci: env
-	${CC} -Wall ${src}/fibonacci.c ${LDFLAGS} -o ${out}/fibonacci
-
-.PHONY += install
+.PHONY: install
 install: all
 	mkdir -p $(DESTDIR)/usr/bin
-	cp ${out}/* $(DESTDIR)/usr/bin/
+	cp $(OUT_DIR)/* $(DESTDIR)/usr/bin/
 
-.PHONY += clean
+.PHONY: list
+list:
+	@echo "Source files:"
+	@ls -la $(SRCS)
+
+.PHONY: clean
 clean:
-	rm -rf ${out}
+	rm -rf $(OUT_DIR)
+
